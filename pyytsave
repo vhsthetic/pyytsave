@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+
+# Function to get user input for the folder
+def get_folder():
+    folder = input("Enter the directory path to save the files (leave blank to use current directory): ")
+    if folder:
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        return folder
+    else:
+        return os.getcwd()
+
+# Function to get video URLs from the user and save to videos.txt
+def get_video_urls():
+    print("Paste the video URLs (one per line). Enter 'done' when finished:")
+    urls = []
+    while True:
+        url = input()
+        if url.lower() == 'done':
+            break
+        urls.append(url)
+    
+    with open("videos.txt", "w") as file:
+        for url in urls:
+            file.write(url + "\n")
+
+while True:
+    # Get the folder from the user
+    save_folder = get_folder()
+
+    # Get video URLs from the user
+    get_video_urls()
+
+    # Your yt-dlp command
+    command = (
+        f'yt-dlp -f "bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]/best[ext=mp4]/best" '
+        f'--write-description --get-comments --print-to-file "%(comments)j" "{save_folder}/%(channel)s/%(title)s.comments.json" '
+        f'--write-thumbnail -v --throttled-rate 40K --write-subs --audio-quality 0 --merge-output-format mp4 --embed-subs '
+        f'-o "{save_folder}/%(channel)s/%(title)s.%(ext)s" -i --batch-file videos.txt'
+    )
+
+    # Run the command
+    subprocess.run(command, shell=True)
+
+    # Ask the user if they want to download more videos
+    again = input("Do you want to download more videos? (yes/no): ")
+    if again.lower() != 'yes':
+        break
+
