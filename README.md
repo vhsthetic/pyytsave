@@ -4,11 +4,11 @@ Python3 script on your linux terminal for yt-dlp. I use this to archive youtube 
 
 # dependencies
 
-Python 3
-Python OS module
-Python subprocess module
-yt-dlp (2024.08.06)
-
+Python 3  
+Python OS module  
+Python subprocess module  
+yt-dlp (2024.08.06)  
+  
 yt-dlp should be available in your software repository. If you have installed yt-dlp and the script does not function you may need to update yt-dlp
 https://github.com/yt-dlp/yt-dlp
 
