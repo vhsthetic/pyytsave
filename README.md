@@ -15,3 +15,7 @@ https://github.com/yt-dlp/yt-dlp
 # to do
 
 An option asking the user if they wish to save the video as separate chapters. Default will be no. 
+
+# help
+
+Feel free to report any trouble or request changes. I will try to accomodate. 
